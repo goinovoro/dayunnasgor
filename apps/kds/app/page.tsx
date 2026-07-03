@@ -214,7 +214,7 @@ export default function KDSStream() {
                                {item.quantity > 1 && <span className="font-black text-sm shrink-0">x{item.quantity}</span>}
                                <h3 className={`font-black uppercase text-sm leading-tight tracking-tight text-black ${item.completed ? 'line-through decoration-2' : ''}`}>{item.name}</h3>
                                {item.variation && (
-                                 <span className={`inline-block px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest text-white rounded-sm ${item.completed ? 'bg-gray-400' : (item.variation.toLowerCase() === 'goreng' ? 'bg-[#E58B6D]' : 'bg-[#3b82f6]')}`}>
+                                 <span className={`inline-block px-2 py-0.5 text-[10px] md:text-xs font-black uppercase tracking-widest text-white rounded-sm ${item.completed ? 'bg-gray-400' : (item.variation.toLowerCase() === 'goreng' ? 'bg-red-500' : 'bg-green-500')}`}>
                                    {item.variation}
                                  </span>
                                )}
