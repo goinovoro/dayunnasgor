@@ -41,16 +41,12 @@ export default function KDSStream() {
 
   // Sort newest-first so new orders appear at the top
   const pendingTickets = [...tickets]
-    .filter(t => t.status !== "READY")
+    .filter(t => t.status !== "SELESAI")
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  const overdueCount = tickets.filter(t => t.status === "PREPPING").length;
+  const overdueCount = tickets.filter(t => t.status === "DITERIMA").length; // All active tickets are DITERIMA
 
   const getNextStatus = (current: OrderStatus): OrderStatus => {
-    switch (current) {
-      case "RECEIVED": return "PREPPING";
-      case "PREPPING": return "READY";
-      default: return "READY";
-    }
+    return "SELESAI";
   };
 
   const categoryColors = ['bg-emerald-400', 'bg-blue-400', 'bg-purple-400', 'bg-rose-400', 'bg-amber-400'];
@@ -174,7 +170,7 @@ export default function KDSStream() {
                         <span className="text-xs font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2 mt-1">
                           <span>{ticket.orderType}</span>
                           <span className="w-1.5 h-1.5 bg-black"></span>
-                          <span className={`px-1.5 py-0.5 text-white ${ticket.status === 'PREPPING' ? 'bg-rose-500' : 'bg-blue-500'}`}>
+                          <span className={`px-1.5 py-0.5 text-white bg-blue-500`}>
                             {ticket.status}
                           </span>
                         </span>

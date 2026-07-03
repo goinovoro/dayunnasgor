@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 
-export type OrderStatus = "RECEIVED" | "PREPPING" | "READY" | "COMPLETED";
+export type OrderStatus = "DITERIMA" | "SELESAI";
 
 export type TicketItem = {
   id: string;
@@ -33,7 +33,7 @@ export const useTicketStore = create<TicketStore>((set, get) => ({
     const { data, error } = await supabase
       .from('tickets')
       .select('*')
-      .neq('status', 'COMPLETED')
+      .neq('status', 'SELESAI')
       .order('created_at', { ascending: true });
 
     if (!error && data) {
@@ -51,7 +51,7 @@ export const useTicketStore = create<TicketStore>((set, get) => ({
   receiveRealtimeTicket: (ticket) => set((state) => {
     // If ticket exists, update it, else append it (unless it's COMPLETED)
     const exists = state.tickets.find(t => t.id === ticket.id);
-    if (ticket.status === 'COMPLETED') {
+    if (ticket.status === 'SELESAI') {
       return { tickets: state.tickets.filter(t => t.id !== ticket.id) };
     }
     

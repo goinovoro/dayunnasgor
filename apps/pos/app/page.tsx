@@ -460,7 +460,7 @@ export default function POSStream() {
                       const { error } = await supabase.from('tickets').insert([{
                         id: ticketId,
                         order_type: orderType,
-                        status: 'RECEIVED',
+                        status: 'DITERIMA',
                         items: items.map(item => ({
                           id: item.cartItemId,
                           name: item.name,
