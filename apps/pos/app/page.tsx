@@ -357,12 +357,12 @@ export default function POSStream() {
 
               <div className="p-6 overflow-y-auto flex-1">
                 <div className="flex justify-between items-center bg-[#1F1F22] p-4 rounded-2xl border border-[#2A2A2D] mb-6">
-                  <span className="text-gray-400 font-semibold text-lg">Total Due</span>
+                  <span className="text-gray-400 font-semibold text-lg">Total Bill</span>
                   <span className="font-black text-[#E58B6D] text-3xl">{formatRp(getTotal())}</span>
                 </div>
 
                 <div className="mb-6">
-                  <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Order Type</h3>
+                  <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Tipe Orderan</h3>
                   <div className="flex space-x-3">
                     <button 
                       onClick={() => setOrderType('Makan ditempat')}
@@ -376,7 +376,7 @@ export default function POSStream() {
                 </div>
 
                 <div className="mb-6">
-                  <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Payment Method</h3>
+                  <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Metode Pembayaran</h3>
                   <div className="flex space-x-3">
                     <button 
                       onClick={() => setPaymentMethod('CASH')}
@@ -392,7 +392,7 @@ export default function POSStream() {
                 {paymentMethod === 'CASH' && (
                   <div className="mb-6 space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
                     <div>
-                      <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Quick Cash</h3>
+                      <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Pembayaran yang diterima</h3>
                       <div className="grid grid-cols-5 gap-2">
                         <button onClick={() => setTenderedAmount(getTotal())} className="py-2 bg-[#1F1F22] border border-[#2A2A2D] rounded-lg text-xs font-bold text-gray-300 hover:bg-[#2A2A2D]">Exact</button>
                         <button onClick={() => setTenderedAmount(15000)} className="py-2 bg-[#1F1F22] border border-[#2A2A2D] rounded-lg text-xs font-bold text-gray-300 hover:bg-[#2A2A2D]">15k</button>
@@ -407,7 +407,7 @@ export default function POSStream() {
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Tendered</h3>
+                      <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Uang yang diterima</h3>
                       <div className="flex bg-[#1F1F22] border border-[#2A2A2D] rounded-xl overflow-hidden focus-within:border-[#E58B6D] transition-colors">
                         <span className="bg-[#2A2A2D] px-4 flex items-center text-gray-400 font-bold">Rp</span>
                         <input 
@@ -420,7 +420,7 @@ export default function POSStream() {
                     </div>
                     {tenderedAmount >= getTotal() && (
                       <div className="flex justify-between items-center bg-[#4A7C59]/10 p-4 rounded-xl border border-[#4A7C59]/20">
-                        <span className="text-[#4A7C59] font-bold">Change Due</span>
+                        <span className="text-[#4A7C59] font-bold">Kembalian</span>
                         <span className="font-black text-[#4A7C59] text-xl">{formatRp(tenderedAmount - getTotal())}</span>
                       </div>
                     )}
@@ -488,7 +488,7 @@ export default function POSStream() {
                   disabled={paymentMethod === 'CASH' && tenderedAmount < getTotal()}
                   className="w-full py-4 rounded-2xl font-bold text-xl shadow-lg transition-all active:scale-[0.98] bg-[#E58B6D] text-[#3B1207] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Complete Transaction
+                  Transaksi Selesai
                 </button>
               </div>
 
@@ -505,8 +505,8 @@ export default function POSStream() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-black text-white mb-2">Transaction Complete!</h2>
-              <p className="text-gray-400 mb-8 font-medium">Order has been sent to the kitchen.</p>
+              <h2 className="text-2xl font-black text-white mb-2">Transaksi Selesai!</h2>
+              <p className="text-gray-400 mb-8 font-medium">Order sudah dikirim ke dapur.</p>
               
               <button 
                 onClick={() => setShowSuccessModal(false)}

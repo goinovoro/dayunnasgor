@@ -1,7 +1,7 @@
 "use client";
 
 import { useTicketStore, OrderStatus, Ticket } from "../store/useTicketStore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useTicketSubscription } from "../hooks/useTicketSubscription";
 
@@ -10,6 +10,8 @@ export default function KDSStream() {
   const [currentTime, setCurrentTime] = useState(Date.now());
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [newTicketIds, setNewTicketIds] = useState<Set<string>>(new Set());
+  const prevTicketIdsRef = useRef<Set<string>>(new Set());
 
   useTicketSubscription();
 
@@ -20,7 +22,27 @@ export default function KDSStream() {
     return () => clearInterval(interval);
   }, []);
 
-  const pendingTickets = tickets.filter(t => t.status !== "READY");
+  // Detect newly arrived tickets and mark them as new
+  useEffect(() => {
+    const currentIds = new Set(tickets.map(t => t.id));
+    const incoming: string[] = [];
+    currentIds.forEach(id => {
+      if (!prevTicketIdsRef.current.has(id)) incoming.push(id);
+    });
+    if (incoming.length > 0) {
+      setNewTicketIds(prev => {
+        const next = new Set(prev);
+        incoming.forEach(id => next.add(id));
+        return next;
+      });
+    }
+    prevTicketIdsRef.current = currentIds;
+  }, [tickets]);
+
+  // Sort newest-first so new orders appear at the top
+  const pendingTickets = [...tickets]
+    .filter(t => t.status !== "READY")
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   const overdueCount = tickets.filter(t => t.status === "PREPPING").length;
 
   const getNextStatus = (current: OrderStatus): OrderStatus => {
@@ -34,7 +56,11 @@ export default function KDSStream() {
   const categoryColors = ['bg-emerald-400', 'bg-blue-400', 'bg-purple-400', 'bg-rose-400', 'bg-amber-400'];
 
   return (
-    <div className="flex h-[100dvh] overflow-hidden bg-[#0B0F19] text-black selection:bg-yellow-400 font-mono" style={{ fontFamily: 'var(--font-jetbrains)' }}>
+    <div
+      className="flex h-[100dvh] overflow-hidden bg-[#0B0F19] text-black selection:bg-yellow-400 font-mono"
+      style={{ fontFamily: 'var(--font-jetbrains)' }}
+      onClick={() => setNewTicketIds(new Set())}
+    >
       
       {/* Sidebar */}
       <aside className={`${isSidebarOpen ? 'w-72 border-r-[4px]' : 'w-0 border-r-0'} bg-white border-black flex flex-col shrink-0 z-20 overflow-hidden transition-all duration-300 ease-in-out`}>
@@ -132,8 +158,14 @@ export default function KDSStream() {
                 const m = Math.floor(diffInSeconds / 60).toString().padStart(2, '0');
                 const s = (diffInSeconds % 60).toString().padStart(2, '0');
 
+                const isNew = newTicketIds.has(ticket.id);
+
                 return (
-                  <div key={ticket.id} className="h-[600px] bg-white border-[4px] border-black flex flex-col overflow-hidden rounded-none shadow-[8px_8px_0_0_rgba(0,0,0,1)] relative transition-all">
+                  <div
+                    key={ticket.id}
+                    className="h-[600px] border-[4px] border-black flex flex-col overflow-hidden rounded-none shadow-[8px_8px_0_0_rgba(0,0,0,1)] relative transition-all duration-500"
+                    style={{ backgroundColor: isNew ? '#e0f2fe' : '#ffffff' }}
+                  >
                     <div className="p-4 border-b-[4px] border-black bg-white flex justify-between items-start">
                       <div>
                         <span className="text-black font-black uppercase text-lg tracking-wider block leading-none mb-1">
