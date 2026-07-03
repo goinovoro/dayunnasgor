@@ -25,6 +25,7 @@ export function useTicketSubscription() {
             receiveRealtimeTicket({
               id: t.id,
               orderType: t.order_type,
+              customerName: t.customer_name,
               status: t.status,
               items: typeof t.items === 'string' ? JSON.parse(t.items) : t.items,
               createdAt: t.created_at,
@@ -45,6 +46,7 @@ export function useTicketSubscription() {
             receiveRealtimeTicket({
               id: t.id,
               orderType: t.order_type,
+              customerName: t.customer_name,
               status: t.status,
               items: typeof t.items === 'string' ? JSON.parse(t.items) : t.items,
               createdAt: t.created_at,

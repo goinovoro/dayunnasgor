@@ -164,8 +164,8 @@ export default function KDSStream() {
                   >
                     <div className="p-4 border-b-[4px] border-black bg-white flex justify-between items-start">
                       <div>
-                        <span className="text-black font-black uppercase text-lg tracking-wider block leading-none mb-1">
-                          # PESANAN {ticket.id}
+                        <span className="text-black font-black uppercase text-lg tracking-wider block leading-none mb-1 truncate" title={ticket.customerName || ticket.id}>
+                          # {ticket.customerName ? `${ticket.customerName} (${ticket.id})` : ticket.id}
                         </span>
                         <span className="text-xs font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2 mt-1">
                           <span>{ticket.orderType}</span>

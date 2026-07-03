@@ -14,6 +14,7 @@ export type TicketItem = {
 export type Ticket = {
   id: string;
   orderType: 'Makan ditempat' | 'Bawa Pulang';
+  customerName?: string;
   status: OrderStatus;
   items: TicketItem[];
   createdAt: string;
@@ -41,6 +42,7 @@ export const useTicketStore = create<TicketStore>((set, get) => ({
       const parsedTickets: Ticket[] = data.map(t => ({
         id: t.id,
         orderType: t.order_type as any,
+        customerName: t.customer_name,
         status: t.status as OrderStatus,
         items: typeof t.items === 'string' ? JSON.parse(t.items) : t.items,
         createdAt: t.created_at,

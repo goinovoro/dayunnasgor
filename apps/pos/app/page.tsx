@@ -16,6 +16,7 @@ export default function POSStream() {
   const [paymentMethod, setPaymentMethod] = useState<'CASH' | 'QRIS'>('CASH');
   const [tenderedAmount, setTenderedAmount] = useState<number>(0);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [customerName, setCustomerName] = useState('');
   
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { items, addItem, updateQuantity, updateNote, getTotal, clearCart } = useCartStore();
@@ -356,6 +357,19 @@ export default function POSStream() {
               </div>
 
               <div className="p-6 overflow-y-auto flex-1">
+                <div className="mb-6">
+                  <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Nama Pelanggan</h3>
+                  <div className="flex bg-[#1F1F22] border border-[#2A2A2D] rounded-xl overflow-hidden focus-within:border-[#E58B6D] transition-colors">
+                    <input 
+                      type="text"
+                      placeholder="Opsional"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      className="flex-1 bg-transparent py-3 px-4 text-white font-bold text-lg focus:outline-none placeholder-gray-600"
+                    />
+                  </div>
+                </div>
+
                 <div className="flex justify-between items-center bg-[#1F1F22] p-4 rounded-2xl border border-[#2A2A2D] mb-6">
                   <span className="text-gray-400 font-semibold text-lg">Total Bill</span>
                   <span className="font-black text-[#E58B6D] text-3xl">{formatRp(getTotal())}</span>
@@ -460,6 +474,7 @@ export default function POSStream() {
                       const { error } = await supabase.from('tickets').insert([{
                         id: ticketId,
                         order_type: orderType,
+                        customer_name: customerName || null,
                         status: 'DITERIMA',
                         items: items.map(item => ({
                           id: item.cartItemId,
@@ -478,6 +493,7 @@ export default function POSStream() {
 
                       setShowSuccessModal(true);
                       clearCart();
+                      setCustomerName('');
                       setIsCheckoutOpen(false);
                       setIsCartOpen(false);
                     } catch (error) {
