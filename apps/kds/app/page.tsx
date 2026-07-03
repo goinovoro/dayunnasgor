@@ -210,16 +210,19 @@ export default function KDSStream() {
                           </div>
 
                           <div className="pt-0.5 flex-1">
-                            <div className="flex items-baseline gap-1.5">
-                               {item.quantity > 1 && <span className="font-black text-sm">x{item.quantity}</span>}
+                            <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
+                               {item.quantity > 1 && <span className="font-black text-sm shrink-0">x{item.quantity}</span>}
                                <h3 className={`font-black uppercase text-sm leading-tight tracking-tight text-black ${item.completed ? 'line-through decoration-2' : ''}`}>{item.name}</h3>
+                               {item.variation && (
+                                 <span className={`inline-block px-1.5 py-0.5 text-[8px] font-black uppercase tracking-widest text-white rounded-sm ${item.completed ? 'bg-gray-400' : (item.variation.toLowerCase() === 'goreng' ? 'bg-[#E58B6D]' : 'bg-[#3b82f6]')}`}>
+                                   {item.variation}
+                                 </span>
+                               )}
                             </div>
                             
-                            {item.variation && (
-                              <div className={`mt-1 inline-block px-1.5 py-0.5 ${item.completed ? 'bg-gray-400' : 'bg-black'} text-white`}>
-                                <span className="text-[8px] font-black uppercase tracking-widest">
-                                  [CATATAN: {item.variation}]
-                                </span>
+                            {item.note && (
+                              <div className={`mt-1 text-[9px] font-bold uppercase tracking-widest ${item.completed ? 'text-gray-400' : 'text-gray-600'}`}>
+                                [CATATAN: {item.note}]
                               </div>
                             )}
                           </div>
