@@ -167,9 +167,9 @@ export default function POSStream() {
                 <div className="grid grid-cols-2 gap-4">
                   {categoryItems.map((item, idx) => (
                     <div key={item.id} className="bg-[#1F1F22] rounded-2xl border border-[#2A2A2D] overflow-hidden flex flex-col active:scale-[0.98] transition-transform">
-                      <div className="relative h-36 bg-[#2A2A2D]">
-                        <img src={item.image} alt={item.name} className="w-full h-full object-cover opacity-80" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#1F1F22] to-transparent"></div>
+                      <div className={`relative h-36 bg-gradient-to-br ${item.color} flex items-center justify-center`}>
+                        <span className="text-6xl select-none drop-shadow-lg">{item.emoji}</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#1F1F22] via-transparent to-transparent"></div>
                         
                         {/* Badges for aesthetics */}
                         {idx % 3 === 0 && (
