@@ -1,0 +1,40 @@
+
+> kds@0.1.0 build
+> next build
+
+   ▲ Next.js 14.1.0
+
+   Creating an optimized production build ...
+ ⚠ Found lockfile missing swc dependencies, patching...
+npm error code ENOWORKSPACES
+npm error This command does not support workspaces.
+npm error A complete log of this run can be found in: C:\Users\Mister Tani\npm-cache\_logs\2026-07-02T00_40_36_258Z-debug-0.log
+> [PWA] Compile server
+> [PWA] Compile server
+> [PWA] Compile client (static)
+> [PWA] Auto register service worker with: G:\Playground\otokowok\node_modules\next-pwa\register.js
+> [PWA] Service worker: G:\Playground\otokowok\apps\kds\public\sw.js
+> [PWA]   url: /sw.js
+> [PWA]   scope: /
+ ⚠ Lockfile was successfully patched, please run "npm install" to ensure @next/swc dependencies are downloaded
+Failed to compile.
+
+./app/page.tsx
+Module not found: Can't resolve '@otokowok/ui'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path G:\Playground\otokowok\apps\kds
+npm error workspace kds@0.1.0
+npm error location G:\Playground\otokowok\apps\kds
+npm error command failed
+npm error command C:\WINDOWS\system32\cmd.exe /d /s /c next build
+npm notice
+npm notice New minor version of npm available! 11.8.0 -> 11.18.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.18.0
+npm notice To update run: npm install -g npm@11.18.0
+npm notice
