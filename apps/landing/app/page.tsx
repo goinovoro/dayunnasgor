@@ -19,7 +19,7 @@ export default function RoleSelection() {
               Dayun Nasgor
             </h1>
             <p className="text-sm text-slate-600 font-bold mt-1">
-              Pilih Workspace
+              Pilih Sistem
             </p>
           </div>
         </div>
