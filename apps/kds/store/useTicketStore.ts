@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 
-export type OrderStatus = "RECEIVED" | "PREPPING" | "READY";
+export type OrderStatus = "RECEIVED" | "PREPPING" | "READY" | "COMPLETED";
 
 export type TicketItem = {
   id: string;
