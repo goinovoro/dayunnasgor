@@ -7,7 +7,7 @@ export default function RoleSelection() {
   return (
     <main 
       className="min-h-screen flex flex-col items-center justify-center p-4 overflow-hidden relative bg-cover bg-center"
-      style={{ backgroundImage: "url('/idle.jpg')" }}
+      style={{ backgroundImage: "url('/idle.webp')" }}
     >
       <div className="absolute inset-0 bg-black/40 z-0 backdrop-blur-[2px]"></div>
       
