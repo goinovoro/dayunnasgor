@@ -97,27 +97,27 @@ export default function KDSStream() {
 
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0">
-        <header className="bg-white px-4 md:px-6 py-4 border-b-[4px] border-black flex flex-wrap gap-4 justify-between items-center shrink-0 z-10 min-h-[80px]">
-          <div className="flex items-center gap-4 md:gap-8">
+        <header className="bg-white px-3 md:px-6 py-3 md:py-4 border-b-[3px] md:border-b-[4px] border-black flex justify-between items-center shrink-0 z-10 min-h-[60px] md:min-h-[80px] overflow-x-auto overflow-y-hidden">
+          <div className="flex items-center gap-2 md:gap-8 shrink-0">
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 -ml-2 text-black hover:bg-yellow-400 border-[3px] border-transparent hover:border-black hover:shadow-[3px_3px_0_0_rgba(0,0,0,1)] rounded-none transition-all active:translate-y-1 active:translate-x-1 active:shadow-none"
+              className="p-1 md:p-2 -ml-1 text-black hover:bg-yellow-400 border-[2px] md:border-[3px] border-transparent hover:border-black hover:shadow-[2px_2px_0_0_rgba(0,0,0,1)] rounded-none transition-all active:translate-y-1 active:translate-x-1 active:shadow-none shrink-0"
             >
-              <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <svg className="w-5 h-5 md:w-7 md:h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                 <path strokeLinecap="square" strokeLinejoin="miter" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
             
-            <div className="flex items-baseline gap-4 md:gap-6">
+            <div className="flex items-baseline gap-3 md:gap-6 shrink-0">
                <div className="flex flex-col">
-                  <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.1em] text-black">AKTIF</span>
-                  <span className="text-2xl md:text-4xl font-black text-black leading-none">{pendingTickets.length}</span>
+                  <span className="text-[8px] md:text-[11px] font-black uppercase tracking-[0.1em] text-black">AKTIF</span>
+                  <span className="text-xl md:text-4xl font-black text-black leading-none">{pendingTickets.length}</span>
                </div>
-               <div className="flex flex-col relative pl-2">
-                  <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.1em] text-black">LEWAT WAKTU</span>
+               <div className="flex flex-col relative pl-1 md:pl-2">
+                  <span className="text-[8px] md:text-[11px] font-black uppercase tracking-[0.1em] text-black whitespace-nowrap">LEWAT</span>
                   <span 
-                    className="text-2xl md:text-4xl font-black text-white leading-none tracking-tight" 
-                    style={{ WebkitTextStroke: '2px black', filter: 'drop-shadow(2px 2px 0 #FACC15)' }}
+                    className="text-xl md:text-4xl font-black text-white leading-none tracking-tight" 
+                    style={{ WebkitTextStroke: '1.5px black', filter: 'drop-shadow(1.5px 1.5px 0 #FACC15)' }}
                   >
                      {overdueCount}
                   </span>
@@ -125,14 +125,14 @@ export default function KDSStream() {
             </div>
           </div>
           
-          <div className="flex items-center gap-4 md:gap-6 ml-auto">
-            <div className="flex flex-col items-end md:pr-4 w-16 md:w-24">
-               <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.1em] text-black">JAM</span>
-               <span className="text-2xl md:text-4xl font-black text-black leading-none tracking-tight">
+          <div className="flex items-center gap-2 md:gap-6 ml-4 md:ml-auto shrink-0">
+            <div className="flex flex-col items-end md:pr-4 w-14 md:w-24 shrink-0">
+               <span className="text-[8px] md:text-[11px] font-black uppercase tracking-[0.1em] text-black">JAM</span>
+               <span className="text-base md:text-4xl font-black text-black leading-none tracking-tight whitespace-nowrap">
                   {isMounted ? new Date(currentTime).toLocaleTimeString('en-US', { hour12: false }) : "--:--"}
                </span>
             </div>
-            <button className="border-[3px] border-black bg-white px-3 md:px-4 py-2 font-black uppercase text-xs md:text-sm tracking-widest hover:bg-gray-100 shadow-[3px_3px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none transition-all">
+            <button className="border-[2px] md:border-[3px] border-black bg-white px-2 md:px-4 py-1.5 md:py-2 font-black uppercase text-[9px] md:text-sm tracking-widest hover:bg-gray-100 shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none transition-all shrink-0">
               LOGOUT
             </button>
           </div>
