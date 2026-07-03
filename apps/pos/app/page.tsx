@@ -17,6 +17,7 @@ export default function POSStream() {
   const [tenderedAmount, setTenderedAmount] = useState<number>(0);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [customerName, setCustomerName] = useState('');
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
   
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { items, addItem, updateQuantity, updateNote, getTotal, clearCart } = useCartStore();
@@ -245,8 +246,12 @@ export default function POSStream() {
 
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {items.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-gray-500">
-                  <p className="font-medium">Cart is empty</p>
+                <div className="h-full flex flex-col items-center justify-center text-gray-500 opacity-60 pt-10">
+                  <svg className="w-20 h-20 mb-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                  <p className="font-bold text-lg">Belum ada pesanan</p>
+                  <p className="text-sm">Silakan pilih menu di samping</p>
                 </div>
               ) : (
                 items.map(item => (
@@ -304,6 +309,8 @@ export default function POSStream() {
                   if (items.length > 0) {
                     setIsCheckoutOpen(true);
                     setTenderedAmount(getTotal()); // Default to exact amount
+                  } else {
+                    setCheckoutError("Cart is empty!");
                   }
                 }}
                 className={`w-full py-4 rounded-2xl font-bold text-xl shadow-lg transition-all active:scale-[0.98] ${
@@ -362,14 +369,6 @@ export default function POSStream() {
                 </button>
               </div>
 
-              <div className="p-6 overflow-y-auto flex-1">
-                <div className="mb-6">
-                  <h3 className="text-sm uppercase tracking-wider text-gray-500 font-bold mb-3">Nama Pelanggan</h3>
-                  <div className="flex bg-[#1F1F22] border border-[#2A2A2D] rounded-xl overflow-hidden focus-within:border-[#E58B6D] transition-colors">
-                    <input 
-                      type="text"
-                      placeholder="Masukkan nama pelanggan"
-                      value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
                       className="flex-1 bg-transparent py-3 px-4 text-white font-bold text-lg focus:outline-none placeholder-gray-600"
                     />
@@ -466,14 +465,21 @@ export default function POSStream() {
               </div>
 
               <div className="p-6 border-t border-[#2A2A2D] shrink-0">
+                {checkoutError && (
+                  <div className="mb-4 bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl flex items-center gap-3 animate-in fade-in duration-300">
+                    <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span className="font-bold">{checkoutError}</span>
+                  </div>
+                )}
                 <button 
                   onClick={async () => {
+                    setCheckoutError(null);
                     if (!customerName.trim()) {
-                      alert('Nama pelanggan wajib diisi!');
+                      setCheckoutError('Nama pelanggan wajib diisi!');
                       return;
                     }
                     if (paymentMethod === 'CASH' && tenderedAmount < getTotal()) {
-                      alert('Tendered amount is less than total due!');
+                      setCheckoutError('Uang yang diterima kurang dari total bill!');
                       return;
                     }
                     
@@ -504,11 +510,12 @@ export default function POSStream() {
                       setShowSuccessModal(true);
                       clearCart();
                       setCustomerName('');
+                      setCheckoutError(null);
                       setIsCheckoutOpen(false);
                       setIsCartOpen(false);
                     } catch (error) {
                       console.error("Failed to send order to KDS", error);
-                      alert("Failed to send order to Kitchen!");
+                      setCheckoutError("Failed to send order to Kitchen!");
                     }
                   }}
                   disabled={(paymentMethod === 'CASH' && tenderedAmount < getTotal()) || !customerName.trim()}
