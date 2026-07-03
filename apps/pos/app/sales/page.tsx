@@ -31,6 +31,12 @@ export default function SalesReport() {
             >
                Laporan Penjualan
             </Link>
+            <Link 
+              href="/inventory"
+              className="block w-full text-left p-4 rounded-xl font-bold transition-colors border bg-[#1C1C1E] text-gray-300 border-transparent hover:bg-[#2A2A2D] hover:text-white"
+            >
+               Inventaris
+            </Link>
           </div>
         </div>
       </aside>

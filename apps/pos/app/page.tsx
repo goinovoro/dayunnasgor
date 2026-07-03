@@ -104,6 +104,12 @@ export default function POSStream() {
             >
                Laporan Penjualan
             </Link>
+            <Link 
+              href="/inventory"
+              className="block w-full text-left p-4 rounded-xl font-bold transition-colors border bg-[#1C1C1E] text-gray-300 border-transparent hover:bg-[#2A2A2D] hover:text-white"
+            >
+               Inventaris
+            </Link>
           </div>
         </div>
       </aside>
@@ -362,7 +368,7 @@ export default function POSStream() {
                   <div className="flex bg-[#1F1F22] border border-[#2A2A2D] rounded-xl overflow-hidden focus-within:border-[#E58B6D] transition-colors">
                     <input 
                       type="text"
-                      placeholder="Opsional"
+                      placeholder="Masukkan nama pelanggan"
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
                       className="flex-1 bg-transparent py-3 px-4 text-white font-bold text-lg focus:outline-none placeholder-gray-600"
@@ -462,6 +468,10 @@ export default function POSStream() {
               <div className="p-6 border-t border-[#2A2A2D] shrink-0">
                 <button 
                   onClick={async () => {
+                    if (!customerName.trim()) {
+                      alert('Nama pelanggan wajib diisi!');
+                      return;
+                    }
                     if (paymentMethod === 'CASH' && tenderedAmount < getTotal()) {
                       alert('Tendered amount is less than total due!');
                       return;
@@ -501,7 +511,7 @@ export default function POSStream() {
                       alert("Failed to send order to Kitchen!");
                     }
                   }}
-                  disabled={paymentMethod === 'CASH' && tenderedAmount < getTotal()}
+                  disabled={(paymentMethod === 'CASH' && tenderedAmount < getTotal()) || !customerName.trim()}
                   className="w-full py-4 rounded-2xl font-bold text-xl shadow-lg transition-all active:scale-[0.98] bg-[#E58B6D] text-[#3B1207] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Transaksi Selesai
