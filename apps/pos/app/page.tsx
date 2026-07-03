@@ -93,7 +93,7 @@ export default function POSStream() {
           </div>
           <div className="p-4 flex-1 overflow-y-auto space-y-3">
             <a 
-              href="http://localhost:3002"
+              href={process.env.NEXT_PUBLIC_LANDING_URL || "http://localhost:3002"}
               className="block w-full text-left p-4 rounded-xl font-bold transition-colors border bg-[#1C1C1E] text-gray-300 border-transparent hover:bg-[#2A2A2D] hover:text-white"
             >
                Home
