@@ -139,8 +139,12 @@ export default function KDSStream() {
                         <span className="text-black font-black uppercase text-lg tracking-wider block leading-none mb-1">
                           # PESANAN {ticket.id}
                         </span>
-                        <span className="text-xs font-bold text-gray-600 uppercase tracking-widest block">
-                          {ticket.orderType}
+                        <span className="text-xs font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2 mt-1">
+                          <span>{ticket.orderType}</span>
+                          <span className="w-1.5 h-1.5 bg-black"></span>
+                          <span className={`px-1.5 py-0.5 text-white ${ticket.status === 'PREPPING' ? 'bg-rose-500' : 'bg-blue-500'}`}>
+                            {ticket.status}
+                          </span>
                         </span>
                       </div>
                       
