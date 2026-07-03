@@ -1,3 +1,8 @@
+"use client";
+
+const POS_URL = process.env.NEXT_PUBLIC_POS_URL || "http://localhost:3000";
+const KDS_URL = process.env.NEXT_PUBLIC_KDS_URL || "http://localhost:3001";
+
 export default function RoleSelection() {
   return (
     <main 
@@ -14,14 +19,14 @@ export default function RoleSelection() {
               Dayun Nasgor
             </h1>
             <p className="text-sm text-slate-600 font-bold mt-1">
-              Select Workspace
+              Pilih Workspace
             </p>
           </div>
         </div>
 
         <div className="w-full space-y-4">
           {/* POS Card */}
-          <a href="http://localhost:3000" className="block w-full group">
+          <a href={POS_URL} className="block w-full group">
             <div className="bg-white rounded-3xl p-6 flex items-center space-x-6 transition-all duration-300 active:scale-95 hover:shadow-xl hover:border-orange-200 border border-transparent shadow-sm relative overflow-hidden">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-md shrink-0">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,7 +41,7 @@ export default function RoleSelection() {
           </a>
 
           {/* KDS Card */}
-          <a href="http://localhost:3001" className="block w-full group">
+          <a href={KDS_URL} className="block w-full group">
             <div className="bg-white rounded-3xl p-6 flex items-center space-x-6 transition-all duration-300 active:scale-95 hover:shadow-xl hover:border-slate-300 border border-transparent shadow-sm relative overflow-hidden">
               <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center shadow-md shrink-0">
                 <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
