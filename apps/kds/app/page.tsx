@@ -71,21 +71,21 @@ export default function KDSStream() {
           </div>
           <div className="p-4 flex-1 overflow-y-auto space-y-4 bg-gray-100">
             <a 
-              href="http://localhost:3002"
+              href={process.env.NEXT_PUBLIC_LANDING_URL || "http://localhost:3002"}
               className="block w-full text-left p-4 font-black transition-transform border-[3px] border-black rounded-none shadow-[4px_4px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none bg-white text-black hover:bg-yellow-400"
             >
                <div className="text-xs uppercase tracking-widest mb-1 opacity-80">Kembali ke</div>
                <div className="text-lg uppercase">Home</div>
             </a>
             <a 
-              href="http://localhost:3000/reports"
+              href={`${process.env.NEXT_PUBLIC_POS_URL || "http://localhost:3000"}/reports`}
               className="block w-full text-left p-4 font-black transition-transform border-[3px] border-black rounded-none shadow-[4px_4px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none bg-yellow-400 text-black hover:bg-yellow-500"
             >
                <div className="text-xs uppercase tracking-widest mb-1 opacity-80">Laporan</div>
                <div className="text-lg uppercase">Sales Reports</div>
             </a>
             <a 
-              href="http://localhost:3000/inventory"
+              href={`${process.env.NEXT_PUBLIC_POS_URL || "http://localhost:3000"}/inventory`}
               className="block w-full text-left p-4 font-black transition-transform border-[3px] border-black rounded-none shadow-[4px_4px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none bg-emerald-400 text-black hover:bg-emerald-500"
             >
                <div className="text-xs uppercase tracking-widest mb-1 opacity-80">Data Barang</div>
