@@ -167,15 +167,15 @@ export default function KDSStream() {
                 return (
                   <div
                     key={ticket.id}
-                    className="h-[450px] border-[3px] border-black flex flex-col overflow-hidden rounded-none shadow-[6px_6px_0_0_rgba(0,0,0,1)] relative transition-all duration-500"
+                    className="h-[280px] md:h-[350px] border-[2px] border-black flex flex-col overflow-hidden rounded-none shadow-[4px_4px_0_0_rgba(0,0,0,1)] relative transition-all duration-500"
                     style={{ backgroundColor: isNew ? '#e0f2fe' : '#ffffff' }}
                   >
-                    <div className="p-3 border-b-[3px] border-black bg-white flex justify-between items-start">
+                    <div className="p-2 border-b-[2px] border-black bg-white flex justify-between items-start">
                       <div>
-                        <span className="text-black font-black uppercase text-base tracking-wider block leading-none mb-1 truncate" title={ticket.customerName || ticket.id}>
+                        <span className="text-black font-black uppercase text-sm tracking-wider block leading-none mb-1 truncate" title={ticket.customerName || ticket.id}>
                           # {ticket.customerName ? `${ticket.customerName} (${ticket.id})` : ticket.id}
                         </span>
-                        <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2 mt-1">
+                        <span className="text-[9px] font-bold text-gray-600 uppercase tracking-widest flex items-center gap-1.5 mt-1">
                           <span>{ticket.orderType}</span>
                           <span className="w-1.5 h-1.5 bg-black"></span>
                           <span className={`px-1.5 py-0.5 text-white bg-blue-500`}>
@@ -184,8 +184,8 @@ export default function KDSStream() {
                         </span>
                       </div>
                       
-                      <div className="border-[2px] border-black px-2 py-0.5 bg-white">
-                         <span className="text-xl font-black tracking-tight">{isMounted ? `${m}:${s}` : "--:--"}</span>
+                      <div className="border-[2px] border-black px-1.5 py-0.5 bg-white">
+                         <span className="text-base font-black tracking-tight">{isMounted ? `${m}:${s}` : "--:--"}</span>
                       </div>
                     </div>
                     
@@ -193,31 +193,31 @@ export default function KDSStream() {
                       {ticket.items.map((item: any, i: number) => (
                         <div 
                           key={item.id} 
-                          className={`relative flex items-start px-3 py-2 border-b-2 border-gray-100 last:border-b-0 cursor-pointer transition-all hover:bg-gray-50 ${item.completed ? 'bg-gray-100' : ''}`}
+                          className={`relative flex items-start px-2 py-1.5 border-b-2 border-gray-100 last:border-b-0 cursor-pointer transition-all hover:bg-gray-50 ${item.completed ? 'bg-gray-100' : ''}`}
                           onClick={() => toggleItemComplete(ticket.id, item.id)}
                         >
-                          <div className={`absolute left-0 top-0 bottom-0 w-2 ${categoryColors[(i + idx) % categoryColors.length]}`}></div>
+                          <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${categoryColors[(i + idx) % categoryColors.length]}`}></div>
                           
                           <div 
-                            className="w-6 h-6 border-[2px] border-black flex-shrink-0 mr-3 ml-1 flex items-center justify-center transition-colors shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:translate-y-px active:translate-x-px active:shadow-none"
+                            className="w-5 h-5 border-[2px] border-black flex-shrink-0 mr-2 ml-1 flex items-center justify-center transition-colors shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:translate-y-px active:translate-x-px active:shadow-none"
                             style={{ backgroundColor: item.completed ? '#000' : '#fff' }}
                           >
                             {item.completed && (
-                              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
+                              <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
                                 <path strokeLinecap="square" strokeLinejoin="miter" d="M5 13l4 4L19 7" />
                               </svg>
                             )}
                           </div>
 
                           <div className="pt-0.5 flex-1">
-                            <div className="flex items-baseline gap-2">
-                               {item.quantity > 1 && <span className="font-black text-base">x{item.quantity}</span>}
-                               <h3 className={`font-black uppercase text-base leading-tight tracking-tight text-black ${item.completed ? 'line-through decoration-2' : ''}`}>{item.name}</h3>
+                            <div className="flex items-baseline gap-1.5">
+                               {item.quantity > 1 && <span className="font-black text-sm">x{item.quantity}</span>}
+                               <h3 className={`font-black uppercase text-sm leading-tight tracking-tight text-black ${item.completed ? 'line-through decoration-2' : ''}`}>{item.name}</h3>
                             </div>
                             
                             {item.variation && (
-                              <div className={`mt-2 inline-block px-2 py-0.5 ${item.completed ? 'bg-gray-400' : 'bg-black'} text-white`}>
-                                <span className="text-[9px] font-black uppercase tracking-widest">
+                              <div className={`mt-1 inline-block px-1.5 py-0.5 ${item.completed ? 'bg-gray-400' : 'bg-black'} text-white`}>
+                                <span className="text-[8px] font-black uppercase tracking-widest">
                                   [CATATAN: {item.variation}]
                                 </span>
                               </div>
@@ -227,17 +227,17 @@ export default function KDSStream() {
                       ))}
                     </div>
                     
-                    <div className="p-3 border-t-[3px] border-black bg-white shrink-0 z-10 flex gap-3">
+                    <div className="p-2 border-t-[2px] border-black bg-white shrink-0 z-10 flex gap-2">
                       <button 
-                        className="flex-1 py-3 bg-yellow-400 text-black border-[2px] border-black rounded-none font-black uppercase tracking-widest shadow-[3px_3px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none transition-all flex items-center justify-center gap-2 text-base"
+                        className="flex-1 py-2 bg-yellow-400 text-black border-[2px] border-black rounded-none font-black uppercase tracking-widest shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none transition-all flex items-center justify-center gap-1.5 text-sm"
                         onClick={() => bumpTicket(ticket.id, getNextStatus(ticket.status))}
                       >
                         SELESAI &rarr;
                       </button>
                       <button 
-                        className="w-14 bg-white text-black border-[2px] border-black rounded-none font-black flex items-center justify-center shadow-[3px_3px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none transition-all"
+                        className="w-12 bg-white text-black border-[2px] border-black rounded-none font-black flex items-center justify-center shadow-[2px_2px_0_0_rgba(0,0,0,1)] active:translate-y-1 active:translate-x-1 active:shadow-none transition-all"
                       >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                           <path strokeLinecap="square" strokeLinejoin="miter" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
                         </svg>
                       </button>
